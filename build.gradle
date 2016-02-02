@@ -1,0 +1,40 @@
+apply plugin: 'application'
+
+// Allows generating an Eclipse project via 'gradle eclipse'
+apply plugin: 'eclipse'
+apply plugin: "org.xtext.xtend"
+
+mainClassName = "alfred.Alfred"
+
+repositories {
+  mavenCentral()
+  maven {
+    url "https://plugins.gradle.org/m2/"
+  }
+}
+
+dependencies {
+  compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.9.0'
+  compile 'com.sun.mail:javax.mail:1.5.5'
+  compile 'net.sourceforge.htmlunit:htmlunit:2.19'
+}
+
+eclipse {
+  project {
+    natures 'org.eclipse.xtext.ui.shared.xtextNature'
+    buildCommand 'org.eclipse.xtext.ui.shared.xtextBuilder'
+  }
+}
+
+buildscript {
+  repositories {
+    mavenCentral()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+
+  dependencies {
+    classpath "org.xtext:xtext-gradle-plugin:1.0.2"
+  }
+}
