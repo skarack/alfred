@@ -15,7 +15,8 @@ class Alfred {
 		// [ ]Reply with results if necessary
 		// [ ]Rinse and repeat
 		
-		val account = new EmailAccount("imap-mail.outlook.com", "jonathan.lafontaine@outlook.com", "Z(((44x!@#")
+		// Modify parameters to match your email provider's information
+		val account = new EmailAccount("imap-server", "username", "password")
 //		while(true) {
 			val emails = EmailClient.fetchUnreadEmail(account)
 			emails.forEach[println('''
