@@ -11,11 +11,16 @@ import org.apache.http.HttpEntity
 import org.apache.http.HttpResponse
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.HttpClients
-import org.eclipse.xtend.lib.annotations.Data
+import alfred.sceduling.Result
 
-@Data class TorrentTask implements Task {
+class TorrentTask implements Task {
 	val String action
 	val String value
+	
+	private new(String action, String value) {
+		this.action = action
+		this.value = value
+	}
 
 	def static fromParts(String[] parts) {
 		val task = switch (parts.get(1).toLowerCase) {
@@ -27,9 +32,13 @@ import org.eclipse.xtend.lib.annotations.Data
 	}
 
 	override execute() {
+		var result = Result.Failure
+		println('''Executing torrent task, action: «action», value: «value»''')
 		switch(action) {
-			case "download": downloadTorrent()
+			case "download": result = downloadTorrent()
 		}
+		
+		result
 	}
 	
 	def private downloadTorrent() {
@@ -46,12 +55,12 @@ import org.eclipse.xtend.lib.annotations.Data
 
 		val client = new Client(
 			InetAddress.getLocalHost(),
-			SharedTorrent.fromFile(torrent, new File("path_to_output_folder"))
+			SharedTorrent.fromFile(torrent, new File("path_to_download_folder"))
 		)
 
-		client.setMaxDownloadRate(50.0)
-		client.setMaxUploadRate(2.0)
 		client.download()
-		new Thread([client.waitForCompletion]).start
+		client.waitForCompletion
+		
+		return Result.Success
 	}
 }

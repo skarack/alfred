@@ -1,5 +1,7 @@
 package alfred.tasks
 
+import alfred.sceduling.Result
+
 interface Task {
-	def void execute()
+	def Result execute()
 }
