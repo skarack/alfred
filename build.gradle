@@ -6,6 +6,16 @@ apply plugin: "org.xtext.xtend"
 
 mainClassName = "alfred.Alfred"
 
+distributions {
+    main {
+        contents {
+            from('src/conf/config.properties') {
+                into ''
+            }
+        }
+    }
+}
+
 repositories {
   mavenCentral()
   maven {

@@ -43,6 +43,7 @@ class TorrentTask implements Task {
 	
 	def private downloadTorrent() {
 		val torrent = File.createTempFile("alfred", "torrent")
+		torrent.deleteOnExit
 		
 		val httpclient = HttpClients.custom().setUserAgent("Mozilla/5.0 (X11; U; Linux i586; en-US; rv:1.7.3) Gecko/20040924 Epiphany/1.4.4 (Ubuntu)").build() 
 		val HttpGet httpget = new HttpGet(value)

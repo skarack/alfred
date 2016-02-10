@@ -41,7 +41,7 @@ class EmailClient {
 	    props.put("mail.transport.protocol", "smtps");
 	    props.put("mail.smtp.starttls.enable","true");
 	    props.put("mail.smtp.auth", "true");
-	    props.put("mail.smtp.host", "smtp_server");
+	    props.put("mail.smtp.host", account.smtpHost);
 	    props.put("mail.smtp.port", "587");
 	
 	    val session = Session.getInstance(props, new javax.mail.Authenticator() {
@@ -62,7 +62,7 @@ class EmailClient {
 		val session = Session.getInstance(System.getProperties(), null)
 		val store = session.getStore(RECV_PROTOCOL)
 
-		store.connect(account.imapServer, -1, account.username, account.password)
+		store.connect(account.imapHost, -1, account.username, account.password)
 		val inbox = store.getDefaultFolder().getFolder("INBOX")
 		inbox.open(Folder.READ_WRITE)
 
