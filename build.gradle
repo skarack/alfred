@@ -9,8 +9,8 @@ mainClassName = "alfred.Alfred"
 distributions {
     main {
         contents {
-            from('src/conf/config.properties') {
-                into ''
+            from('config.properties') {
+                into 'bin'
             }
         }
     }
