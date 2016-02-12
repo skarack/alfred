@@ -51,7 +51,7 @@ class EmailClient {
 		});
 	
 	    val message = new MimeMessage(session);
-	    message.setFrom(new InternetAddress("from_address"));
+	    message.setFrom(new InternetAddress("reply_from_email"));
 	    message.setRecipients(Message.RecipientType.TO, email.from);
 	    message.setSubject(email.subject); 
 	    message.setText(body);

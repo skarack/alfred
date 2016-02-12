@@ -6,4 +6,7 @@ class EmptyTask implements Task {
 	override execute() {
 		return Result.Failure
 	}
+	
+	override notify(int errCode) {
+	}
 }
